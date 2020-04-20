@@ -30,7 +30,13 @@ for:
     cache: /home/appveyor/vcpkg
 
 init:
-    - sh: if [ $PLATFORM = "x86" ]; then exit 1; fi
+- ps: |
+    if (Test-Path 'C:\Strawberry') {
+      Remove-Path 'C:\Strawberry\c\bin'
+      Remove-Path 'C:\Strawberry\perl\site\bin'
+      $env:path = $env:path.replace('C:\Strawberry\c\bin;', '').replace('C:\Strawberry\perl\site\bin;', '')
+    }
+- sh: if [ $PLATFORM = "x86" ]; then exit 1; fi
 
 install:
     - cmd: if "%PLATFORM%" == "x64" call "C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Auxiliary\Build\vcvars64.bat"
