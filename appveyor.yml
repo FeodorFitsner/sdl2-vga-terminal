@@ -10,11 +10,9 @@ image:
 
 platform:
   - x86
-  - x64
 
 configuration:
   - Debug
-  - Release
 
 environment:
     VCPKG_SCRIPT: scripts/buildsystems/vcpkg.cmake
